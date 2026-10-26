@@ -1,0 +1,5 @@
+applications:
+- name: bptest-nodejs
+  memory: 128M
+  buildpacks: [nodejs_buildpack]
+  stack: cflinuxfs4

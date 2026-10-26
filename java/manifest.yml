@@ -1,0 +1,9 @@
+applications:
+- name: bptest-java
+  memory: 1G
+  buildpacks: [java_buildpack]
+  stack: cflinuxfs4
+  path: target/bptest-java-1.0.0.jar
+# Build first (needs JDK 17+ and Maven):  mvn -q -DskipTests package
+# To pin the JRE on jbp 5.0.x, use UNQUOTED keys, new version scheme:
+#   JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'   (not { "jre": {...} }, not 1.8.0_+)

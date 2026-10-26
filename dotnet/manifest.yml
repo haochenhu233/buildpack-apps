@@ -1,0 +1,6 @@
+applications:
+- name: bptest-dotnet
+  memory: 256M          # deliberately small: if the runtime mis-detects the cgroup-v2
+  instances: 1          # limit (runtime < 10.0.11), the GC overshoots 256M -> OOM on noble.
+  buildpacks: [dotnet_core_buildpack]
+  stack: cflinuxfs4

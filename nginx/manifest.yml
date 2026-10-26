@@ -1,0 +1,9 @@
+applications:
+- name: bptest-nginx
+  memory: 128M
+  buildpacks: [nginx_buildpack]
+  stack: cflinuxfs4
+  env:
+    # noble resolver. Set to 169.254.0.2 to reproduce the jammy break (/proxy/ -> 502).
+    # Best practice in real apps: derive this from /etc/resolv.conf at startup instead.
+    DNS_IP: 169.254.0.53

@@ -1,0 +1,1 @@
+# stdlib only — presence of this file lets the python buildpack detect the app

@@ -1,0 +1,7 @@
+applications:
+- name: bptest-ruby
+  memory: 256M
+  buildpacks: [ruby_buildpack]
+  stack: cflinuxfs4
+# Run `bundle lock` locally (or let the buildpack resolve) so Gemfile.lock pins the
+# newest ruby 3.4.x the buildpack bundles.

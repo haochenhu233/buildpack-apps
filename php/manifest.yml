@@ -1,0 +1,7 @@
+applications:
+- name: bptest-php
+  memory: 128M
+  buildpacks: [php_buildpack]
+  stack: cflinuxfs4
+# Note: braces are ONLY for *_LATEST placeholders. To pin an explicit version use a BARE
+# value in options.json, e.g. "PHP_VERSION": "8.4.13" (not "{8.4.13}").

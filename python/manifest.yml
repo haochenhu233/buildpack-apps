@@ -1,0 +1,5 @@
+applications:
+- name: bptest-python
+  memory: 128M
+  buildpacks: [python_buildpack]
+  stack: cflinuxfs4

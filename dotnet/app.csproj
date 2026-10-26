@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- Always run the newest 10.x the buildpack bundles (catches patch-level runtime
+         bugs like the cgroup-v2 OOM fixed in 10.0.11). Bump the TFM when you want a newer major. -->
+    <RollForward>LatestMinor</RollForward>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+</Project>
