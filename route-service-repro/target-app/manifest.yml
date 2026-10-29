@@ -1,0 +1,5 @@
+applications:
+- name: target-app
+  memory: 128M
+  buildpacks: [go_buildpack]
+  stack: cflinuxfs4
