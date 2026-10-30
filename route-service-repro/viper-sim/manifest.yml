@@ -1,7 +1,7 @@
 applications:
 - name: viper-sim
   memory: 128M
-  buildpacks: [go_buildpack]
+  buildpacks: [nodejs_buildpack]
   stack: cflinuxfs4
 # After push, map viper-sim onto a route whose host resolves to a PRIVATE IP (see README),
 # so the default egress_blocklist blocks gorouter -> viper-sim and you get the 502 to reproduce.

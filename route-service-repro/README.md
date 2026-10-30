@@ -1,7 +1,7 @@
 # Route-service egress_blocklist repro (viper-auth simulation)
 
 Reproduces the post-upgrade **502** that viper-auth causes, and validates the fix.
-Two tiny Go apps:
+Two tiny Node.js apps (stdlib only — no deps, no compile):
 
 - **`target-app`** — the protected app. `GET /` returns `TARGET OK …` if the request
   made it through the route service.
@@ -89,6 +89,6 @@ cf delete viper-sim -f && cf delete target-app -f
 ```
 
 ## Notes
-- `go_buildpack` builds both from source at stage time (Go stdlib only — offline-safe).
+- `nodejs_buildpack` runs both directly (Node stdlib only — no deps, offline-safe).
 - The whole point: **403 = route service reachable; 502 = gorouter blocked from reaching it.**
   Your fix flips the 502 back to a real response.
