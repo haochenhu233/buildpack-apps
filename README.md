@@ -41,6 +41,15 @@ cf push -f <app>/manifest.yml
 Each manifest sets the buildpack + stack. For the air-gap/offline buildpacks, set the
 buildpack name to your `*_buildpack` and make sure the latest is the system default.
 
+## Prebuilt artifacts (air-gap)
+Most apps stage from source, but **java** is compiled. The client runs in an air-gapped
+environment and cannot build, so the Spring Boot fat JAR is committed as a prebuilt
+artifact at `java/target/bptest-java-1.0.0.jar` (force-added past `.gitignore`). It is a
+build output, not source. Rebuild it from `java/pom.xml` with
+`mvn -DskipTests package` (or the Maven Docker image) whenever the pom or `src/` changes,
+then re-add it with `git add -f`. The app's `GET /` reports the JRE the buildpack picked,
+which is the number for the proof table.
+
 ## Not included here
 - **binary**: build the `go/` app (`GOOS=linux go build -o server`) and push the binary
   with `-b binary_buildpack` — no separate app needed.
