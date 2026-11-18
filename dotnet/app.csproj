@@ -1,8 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <!-- Always run the newest 10.x the buildpack bundles (catches patch-level runtime
-         bugs like the cgroup-v2 OOM fixed in 10.0.11). Bump the TFM when you want a newer major. -->
+    <!-- RuntimeFrameworkVersion is a workaround for dotnet-core-buildpack v2.4.49, whose
+         source-build runtime resolver uses a regex (\d\.\d) that cannot parse net10.0 and
+         fails staging with "could not find a version of dotnet-runtime to install". Setting
+         this makes the buildpack skip that regex and install the version named here.
+         Bump to the newest 10.x the deployed buildpack bundles (v2.4.49 only has 10.0.2).
+         A newer buildpack that fixes the regex lets you remove this line. -->
+    <RuntimeFrameworkVersion>10.0.2</RuntimeFrameworkVersion>
     <RollForward>LatestMinor</RollForward>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
