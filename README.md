@@ -58,8 +58,19 @@ resolved for the `x86_64-linux` cell platform. puma and nio4r are cached as sour
 and compiled on the cell. Refresh them with `bundle lock` + `bundle cache` in a
 `linux/amd64` ruby:3.4 container after any Gemfile change.
 
+## hwc (Windows)
+The **hwc** app covers the Windows stemcell path, which nothing else in the suite
+exercises. It is a minimal ASP.NET app (`Web.config` + `default.aspx`) hosted by HWC
+(Hostable Web Core) on a Windows cell. No Windows build is needed: the `.aspx` uses
+inline code that ASP.NET compiles on the cell at first request. HWC installs no runtime
+of its own, so `GET /` reports the **.NET Framework** version the Windows stemcell
+provides. Push it onto the Windows isolation segment (oneagent-windows):
+```
+cf push bptest-hwc -s windows -b hwc_buildpack
+```
+
 ## Not included here
-- **binary**: build the `go/` app (`GOOS=linux go build -o server`) and push the binary
-  with `-b binary_buildpack` — no separate app needed.
-- **hwc (windows)**: needs a Windows build; push a minimal ASP.NET app with
-  `-s windows -b hwc_buildpack` separately.
+- **binary**: the `binary_buildpack` installs no runtime, it just runs a precompiled
+  executable, so there is no runtime version to prove. If you need the check, build the
+  `go/` app static (`GOOS=linux CGO_ENABLED=0 go build -o server`) and push it with
+  `-b binary_buildpack`. No separate app is kept here.

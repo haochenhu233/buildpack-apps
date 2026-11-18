@@ -1,0 +1,15 @@
+applications:
+- name: bptest-hwc
+  memory: 512M
+  stack: windows
+  buildpacks: [hwc_buildpack]
+# HWC hosts this ASP.NET app on a Windows cell, which live in the oneagent-windows
+# isolation segment. The space must be assigned that segment (cf set-space-isolation-segment),
+# then stack: windows places the app there. HWC provides its own start command (hwc.exe),
+# so no Procfile is needed. It reads $PORT automatically.
+#
+# Push:  cf push bptest-hwc -s windows -b hwc_buildpack
+#
+# hwc_buildpack v3.1.47 bundles HWC 90.0.0. HWC installs no runtime of its own, so
+# GET / reports the .NET Framework version the Windows stemcell provides (via
+# default.aspx), which is the number for the Windows side of the proof table.
