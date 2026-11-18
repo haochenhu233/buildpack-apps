@@ -22,7 +22,8 @@ go/bptest
 
 # Ruby
 ruby/.bundle/
-ruby/vendor/
+ruby/vendor/bundle/
+# NB: ruby/vendor/cache/ is intentionally committed (vendored gems for the air-gap)
 
 # CF staging leftovers
 *.droplet

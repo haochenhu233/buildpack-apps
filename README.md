@@ -50,6 +50,14 @@ build output, not source. Rebuild it from `java/pom.xml` with
 then re-add it with `git add -f`. The app's `GET /` reports the JRE the buildpack picked,
 which is the number for the proof table.
 
+## Vendored gems (air-gap)
+The **ruby** app would otherwise run `bundle install` against rubygems.org at stage time,
+which the air-gap blocks. So `ruby/Gemfile.lock` and `ruby/vendor/cache/*.gem` are
+committed, and the buildpack installs from that cache with no network. The gems are
+resolved for the `x86_64-linux` cell platform. puma and nio4r are cached as source gems
+and compiled on the cell. Refresh them with `bundle lock` + `bundle cache` in a
+`linux/amd64` ruby:3.4 container after any Gemfile change.
+
 ## Not included here
 - **binary**: build the `go/` app (`GOOS=linux go build -o server`) and push the binary
   with `-b binary_buildpack` — no separate app needed.
